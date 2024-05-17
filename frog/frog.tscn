@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://f3pn7ii05tq3"]
+
+[ext_resource type="Script" path="res://frog/frog.gd" id="1_kwn76"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_a34wc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtaiy"]
+size = Vector2(200, 198)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_br2gd"]
+size = Vector2(200, 198)
+
+[node name="Frog" type="CharacterBody2D"]
+script = ExtResource("1_kwn76")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-3.8147e-06, 3.8147e-06)
+texture = SubResource("PlaceholderTexture2D_a34wc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gtaiy")
+
+[node name="DecisionTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="GrabDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabDetector"]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_br2gd")
+
+[connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
+[connection signal="input_event" from="GrabDetector" to="." method="_on_grab_detector_input_event"]

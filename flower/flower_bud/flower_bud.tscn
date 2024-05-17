@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://mqrwr7a0kced"]
+
+[ext_resource type="Script" path="res://flower/flower_bud/flower_bud.gd" id="1_dalgt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ak60e"]
+size = Vector2(67, 60)
+
+[node name="FlowerBud" type="Area2D"]
+script = ExtResource("1_dalgt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -34.0
+offset_top = -29.0
+offset_right = 33.0
+offset_bottom = 31.0
+mouse_filter = 1
+color = Color(1, 0, 0, 1)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_ak60e")
+
+[node name="GrowthTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="timeout" from="GrowthTimer" to="." method="_on_growth_timer_timeout"]

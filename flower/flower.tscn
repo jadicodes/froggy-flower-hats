@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddqjscxeq8bvu"]
+
+[ext_resource type="Texture2D" uid="uid://c5ltw04553bt3" path="res://flower/ungrown.png" id="1_h1w6n"]
+[ext_resource type="PackedScene" uid="uid://mqrwr7a0kced" path="res://flower/flower_bud/flower_bud.tscn" id="3_sb3lb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a3op"]
+size = Vector2(187, 216)
+
+[node name="Flower" type="Area2D"]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(-14.5, 16)
+shape = SubResource("RectangleShape2D_2a3op")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_h1w6n")
+
+[node name="GrowthTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="FlowerBud" parent="." instance=ExtResource("3_sb3lb")]
+position = Vector2(-82, -49)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="timeout" from="GrowthTimer" to="." method="_on_growth_timer_timeout"]

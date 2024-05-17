@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://ocaub7gak7p1"]
+
+[ext_resource type="Script" path="res://world/world.gd" id="1_1v7lg"]
+[ext_resource type="PackedScene" uid="uid://irjnc1cdyyyg" path="res://stump/stump.tscn" id="2_4wi48"]
+[ext_resource type="PackedScene" uid="uid://ddqjscxeq8bvu" path="res://flower/flower.tscn" id="4_vtfie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqhkv"]
+size = Vector2(2705, 412.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjgjx"]
+size = Vector2(188, 955)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_1v7lg")
+
+[node name="Sjy" type="ColorRect" parent="."]
+offset_left = -171.0
+offset_top = -113.0
+offset_right = 2063.0
+offset_bottom = 510.0
+mouse_filter = 2
+color = Color(0.203922, 0.666667, 0.701961, 1)
+
+[node name="Hill" type="ColorRect" parent="."]
+offset_left = -198.0
+offset_top = 484.0
+offset_right = 2036.0
+offset_bottom = 893.0
+mouse_filter = 2
+color = Color(0, 0.890196, 0.360784, 1)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Grass" type="ColorRect" parent="Floor"]
+offset_left = -57.0
+offset_top = 890.0
+offset_right = 1940.0
+offset_bottom = 1519.0
+color = Color(0.254902, 0.635294, 0.247059, 1)
+
+[node name="Collision" type="CollisionShape2D" parent="Floor"]
+position = Vector2(958.5, 1097)
+shape = SubResource("RectangleShape2D_oqhkv")
+
+[node name="Stump" parent="." instance=ExtResource("2_4wi48")]
+position = Vector2(364, 384)
+
+[node name="Flower" parent="." instance=ExtResource("4_vtfie")]
+position = Vector2(882, 359)
+
+[node name="FrogSpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-95, 467.5)
+shape = SubResource("RectangleShape2D_cjgjx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2014, 447)
+shape = SubResource("RectangleShape2D_cjgjx")
+
+[connection signal="done_pampering" from="Stump" to="." method="_on_stump_done_pampering"]
+[connection signal="ready_to_pamper" from="Stump" to="." method="_on_stump_ready_to_pamper"]
+[connection signal="timeout" from="FrogSpawnTimer" to="." method="_on_frog_spawn_timer_timeout"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://irjnc1cdyyyg"]
+
+[ext_resource type="Script" path="res://stump/stump.gd" id="1_u7vet"]
+[ext_resource type="Texture2D" uid="uid://di6u48ru762k0" path="res://stump/empty.png" id="2_aup2c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfout"]
+size = Vector2(64, 61)
+
+[node name="Stump" type="Area2D"]
+script = ExtResource("1_u7vet")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jfout")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_aup2c")
+
+[node name="Marker" type="Marker2D" parent="."]
+position = Vector2(0, -50)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
