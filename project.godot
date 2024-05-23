@@ -32,8 +32,8 @@ grab={
 
 [layer_names]
 
-2d_physics/layer_1="grabbed"
-2d_physics/layer_2="not_grabbed"
+2d_physics/layer_1="detectable"
+2d_physics/layer_2="not_detectable"
 
 [rendering]
 

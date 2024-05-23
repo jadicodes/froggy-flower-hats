@@ -8,15 +8,11 @@ func _ready():
 	_make_new_frog()
 
 
-func _process(_delta):
-	if _ready_to_pamper == true:
-		if _frog._get_state() == 3:
-			_frog.global_position = $Stump._get_marker_position()
-			_frog._set_state(4)
-
-
-func _on_stump_ready_to_pamper():
+func _on_stump_ready_to_pamper(body):
 	_ready_to_pamper = true
+	if body._get_state() == 3:
+			body.global_position = $Stump._get_marker_position()
+			body._set_state(4)
 
 
 func _on_stump_done_pampering():

@@ -35,15 +35,15 @@ var _frog_state:
 
 		if state == frog_state.GRABBED:
 			_set_sprite_texture(GRABBED)
-			_set_physics_layer(1)
+			_set_physics_layer(2)
 
 		if state == frog_state.FALLING:
 			_set_sprite_texture(FALLING)
-			_set_physics_layer(2)
+			_set_physics_layer(1)
 
 		if state == frog_state.BEING_PAMPERED:
 			_set_sprite_texture(BEING_PAMPERED)
-			_set_physics_layer(2)
+			_set_physics_layer(1)
 			_set_timer()
 
 		_frog_state = state
