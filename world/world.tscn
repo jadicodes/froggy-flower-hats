@@ -45,10 +45,10 @@ position = Vector2(958.5, 1097)
 shape = SubResource("RectangleShape2D_oqhkv")
 
 [node name="Stump" parent="." instance=ExtResource("2_4wi48")]
-position = Vector2(364, 384)
+position = Vector2(376, 435)
 
 [node name="Flower" parent="." instance=ExtResource("4_vtfie")]
-position = Vector2(882, 359)
+position = Vector2(854, 384)
 
 [node name="FrogSpawnTimer" type="Timer" parent="."]
 wait_time = 5.0

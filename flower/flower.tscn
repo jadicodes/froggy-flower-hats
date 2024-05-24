@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ddqjscxeq8bvu"]
 
-[ext_resource type="Texture2D" uid="uid://c5ltw04553bt3" path="res://flower/ungrown.png" id="1_h1w6n"]
+[ext_resource type="Texture2D" uid="uid://bga72i0r1n20s" path="res://flower/bush.png" id="1_gn265"]
 [ext_resource type="PackedScene" uid="uid://mqrwr7a0kced" path="res://flower/flower_bud/flower_bud.tscn" id="3_sb3lb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2a3op"]
@@ -13,7 +13,7 @@ position = Vector2(-14.5, 16)
 shape = SubResource("RectangleShape2D_2a3op")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_h1w6n")
+texture = ExtResource("1_gn265")
 
 [node name="GrowthTimer" type="Timer" parent="."]
 wait_time = 5.0
