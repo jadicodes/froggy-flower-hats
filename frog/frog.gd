@@ -60,6 +60,7 @@ func _ready() -> void:
 
 func _physics_process(delta) -> void:
 	if _frog_state == frog_state.GRABBED:
+		velocity.y = 0
 		position = get_global_mouse_position()
 
 	if _frog_state == frog_state.FALLING:
