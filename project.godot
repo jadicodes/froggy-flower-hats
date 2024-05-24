@@ -32,8 +32,9 @@ grab={
 
 [layer_names]
 
-2d_physics/layer_1="detectable"
-2d_physics/layer_2="not_detectable"
+2d_physics/layer_1="world"
+2d_physics/layer_2="grabbed"
+2d_physics/layer_3="frogs"
 
 [rendering]
 

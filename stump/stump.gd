@@ -10,10 +10,19 @@ enum StumpState {
 	EMPTY
 	}
 
-var stump_state = StumpState.EMPTY
+var stump_state:
+	set(state):
+		if state == StumpState.EMPTY:
+			set_texture()
+		if state == StumpState.FULL:
+			set_texture()
+		stump_state = state
+
 var _pampered_frog : Frog
 
+
 func _ready() -> void:
+	stump_state = StumpState.EMPTY
 	set_texture()
 
 
@@ -36,13 +45,15 @@ func _on_body_entered(body) -> void:
 		emit_signal("entered", body, _get_marker_position())
 
 		_pampered_frog = body
-		set_texture()
+		print("Entered:" + str(_pampered_frog))
+		print(stump_state)
 
 
 func _on_body_exited(body) -> void:
 	if body == _pampered_frog:
 		stump_state = StumpState.EMPTY
-		set_texture()
+		print("Exited:" + str(_pampered_frog))
+		print(stump_state)
 
 
 func _get_marker_position() -> Vector2:

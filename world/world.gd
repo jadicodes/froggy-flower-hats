@@ -1,5 +1,4 @@
 extends Node2D
-var _ready_to_pamper
 
 var _frog: Frog
 

@@ -26,24 +26,23 @@ var _frog_state:
 	set(state):
 		if state == frog_state.WALK:
 			_set_sprite_texture(WALK)
-			_set_physics_layer(2)
 			_direction = [1, -1].pick_random()
+			_reset_z_index()
 
 		if state == frog_state.IDLE:
 			_set_sprite_texture(IDLE)
-			_set_physics_layer(2)
+			_reset_z_index()
 
 		if state == frog_state.GRABBED:
 			_set_sprite_texture(GRABBED)
-			_set_physics_layer(2)
+			z_index = 10
 
 		if state == frog_state.FALLING:
 			_set_sprite_texture(FALLING)
-			_set_physics_layer(1)
 
 		if state == frog_state.BEING_PAMPERED:
 			_set_sprite_texture(BEING_PAMPERED)
-			_set_physics_layer(1)
+			_reset_z_index()
 			_set_timer()
 
 		_frog_state = state
@@ -83,6 +82,10 @@ func _physics_process(delta) -> void:
 		velocity.x = 0
 
 	move_and_slide()
+
+
+func _reset_z_index():
+	z_index = 3
 
 
 func _set_state(state: int) -> void:
