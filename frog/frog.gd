@@ -27,21 +27,26 @@ var _frog_state:
 		if state == frog_state.WALK:
 			_set_sprite_texture(WALK)
 			_direction = [1, -1].pick_random()
+			set_collision_layer_value(4, false)
 			_reset_z_index()
 
 		if state == frog_state.IDLE:
 			_set_sprite_texture(IDLE)
+			set_collision_layer_value(4, false)
 			_reset_z_index()
 
 		if state == frog_state.GRABBED:
 			_set_sprite_texture(GRABBED)
+			set_collision_layer_value(4, false)
 			z_index = 10
 
 		if state == frog_state.FALLING:
 			_set_sprite_texture(FALLING)
+			set_collision_layer_value(4, true)
 
 		if state == frog_state.BEING_PAMPERED:
 			_set_sprite_texture(BEING_PAMPERED)
+			set_collision_layer_value(4, true)
 			_reset_z_index()
 			_set_timer()
 
@@ -57,14 +62,12 @@ func _physics_process(delta) -> void:
 	if _frog_state == frog_state.GRABBED:
 		position = get_global_mouse_position()
 
-
 	if _frog_state == frog_state.FALLING:
 		velocity.y += _gravity * delta
 		velocity.x = 0
 		
 		if is_on_floor():
 			_frog_state = frog_state.IDLE
-
 
 	if _frog_state == frog_state.WALK:
 		velocity.y += _gravity * delta
@@ -98,11 +101,6 @@ func _set_timer() -> void:
 
 func _set_sprite_texture(texture: CompressedTexture2D) -> void:
 	$Sprite.texture = texture
-
-
-func _set_physics_layer(_layer) -> void:
-	collision_layer = _layer
-	collision_mask = _layer
 
 
 func _set_position(marker_position) -> void:

@@ -29,13 +29,9 @@ func _ready() -> void:
 func set_texture() -> void:
 	match stump_state:
 		StumpState.FULL:
-			_set_sprite_texture(FULL_TEXTURE)
+			return
 		StumpState.EMPTY:
-			_set_sprite_texture(EMPTY_TEXTURE)
-
-
-func _set_sprite_texture(tex) -> void:
-	$Sprite.texture = tex
+			return
 
 
 func _on_body_entered(body) -> void:
