@@ -12,7 +12,7 @@ enum StumpState {
 	}
 
 var stump_state = StumpState.EMPTY
-
+var _pampered_frog : Frog
 
 func _ready():
 	set_texture()
@@ -31,17 +31,15 @@ func _set_sprite_texture(tex):
 
 
 func _on_body_entered(body):
-	if stump_state == StumpState.FULL:
-		return
-	if body is Frog:
-		if stump_state == StumpState.EMPTY:
-			stump_state = StumpState.FULL
-			emit_signal("ready_to_pamper", body)
+	if body is Frog and stump_state == StumpState.EMPTY:
+		_pampered_frog = body
+		stump_state = StumpState.FULL
+		emit_signal("ready_to_pamper", body)
 		set_texture()
 
 
 func _on_body_exited(body):
-	if body is Frog:
+	if body == _pampered_frog:
 		stump_state = StumpState.EMPTY
 		done_pampering.emit()
 		set_texture()

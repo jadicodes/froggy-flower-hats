@@ -11,8 +11,8 @@ func _ready():
 func _on_stump_ready_to_pamper(body):
 	_ready_to_pamper = true
 	if body._get_state() == 3:
-			body.global_position = $Stump._get_marker_position()
-			body._set_state(4)
+		body.global_position = $Stump._get_marker_position()
+		body._set_state(4)
 
 
 func _on_stump_done_pampering():
@@ -20,7 +20,6 @@ func _on_stump_done_pampering():
 
 
 func _make_new_frog():
-	#var _positions = [(-320, 660), (2180, 660)]
 	_frog = preload("res://frog/frog.tscn").instantiate()
 	call_deferred("add_child", _frog)
 	_frog.global_position = Vector2(320, 660)
