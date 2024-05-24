@@ -5,14 +5,7 @@ signal entered(frog, marker_position)
 const FULL_TEXTURE = preload("res://stump/full.png")
 const EMPTY_TEXTURE = preload("res://stump/empty.png")
 
-enum StumpState {
-	FULL,
-	EMPTY
-	}
-
 var _is_empty : bool
-
-
 var _pampered_frog : Frog
 
 

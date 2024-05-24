@@ -41,7 +41,7 @@ var _frog_state:
 			z_index = 10
 
 		if state == frog_state.FALLING:
-			_set_sprite_texture(FALLING)
+			$FallingTimer.start()
 			set_collision_layer_value(4, true)
 
 		if state == frog_state.BEING_PAMPERED:
@@ -127,3 +127,8 @@ func _on_grab_detector_input_event(_viewport, event, _shape_idx) -> void:
 
 func _get_state() -> int:
 	return _frog_state
+
+
+func _on_falling_timer_timeout():
+	if _get_state() == 3:
+		_set_sprite_texture(FALLING)

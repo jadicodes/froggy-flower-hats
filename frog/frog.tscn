@@ -32,5 +32,9 @@ collision_layer = 4
 position = Vector2(-1, -2.5)
 shape = SubResource("RectangleShape2D_br2gd")
 
+[node name="FallingTimer" type="Timer" parent="."]
+wait_time = 0.25
+
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
 [connection signal="input_event" from="GrabDetector" to="." method="_on_grab_detector_input_event"]
+[connection signal="timeout" from="FallingTimer" to="." method="_on_falling_timer_timeout"]
