@@ -18,7 +18,7 @@ shape = SubResource("RectangleShape2D_jfout")
 texture = ExtResource("2_aup2c")
 
 [node name="Marker" type="Marker2D" parent="."]
-position = Vector2(0, -132)
+position = Vector2(5, -132)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

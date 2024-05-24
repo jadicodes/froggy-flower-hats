@@ -7,8 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gtaiy"]
 size = Vector2(200, 144)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_br2gd"]
-size = Vector2(200, 183)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_47nvu"]
+radius = 60.0
+height = 151.0
 
 [node name="Frog" type="CharacterBody2D"]
 collision_layer = 4
@@ -30,10 +31,10 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabDetector"]
 position = Vector2(-1, -2.5)
-shape = SubResource("RectangleShape2D_br2gd")
+shape = SubResource("CapsuleShape2D_47nvu")
 
 [node name="FallingTimer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.15
 
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
 [connection signal="input_event" from="GrabDetector" to="." method="_on_grab_detector_input_event"]
