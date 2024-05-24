@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Frog
 
 
-const SPEED = 100.0
+const SPEED : float = 100.0
 
 const WALK = preload("res://frog/walk.png")
 const IDLE = preload("res://frog/idle.png")
@@ -49,12 +49,12 @@ var _frog_state:
 		_frog_state = state
 
 
-func _ready():
+func _ready() -> void:
 	_frog_state = frog_state.WALK
 	_set_timer()
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if _frog_state == frog_state.GRABBED:
 		position = get_global_mouse_position()
 
@@ -89,7 +89,7 @@ func _set_state(state: int) -> void:
 	_frog_state = state
 
 
-func _set_timer():
+func _set_timer() -> void:
 	$DecisionTimer.wait_time = _possible_times.pick_random()
 
 
@@ -97,12 +97,16 @@ func _set_sprite_texture(texture: CompressedTexture2D) -> void:
 	$Sprite.texture = texture
 
 
-func _set_physics_layer(_layer):
+func _set_physics_layer(_layer) -> void:
 	collision_layer = _layer
 	collision_mask = _layer
 
 
-func _on_decision_timer_timeout():
+func _set_position(marker_position) -> void:
+	global_position = marker_position
+
+
+func _on_decision_timer_timeout() -> void:
 	if _frog_state == frog_state.WALK:
 		_frog_state = frog_state.IDLE
 		return
@@ -112,12 +116,12 @@ func _on_decision_timer_timeout():
 		return
 
 
-func _on_grab_detector_input_event(_viewport, event, _shape_idx):
+func _on_grab_detector_input_event(_viewport, event, _shape_idx) -> void:
 	if _frog_state != frog_state.GRABBED and event.is_action_pressed("grab"):
 		_frog_state = frog_state.GRABBED
 	if _frog_state == frog_state.GRABBED and event.is_action_released("grab"):
 		_frog_state = frog_state.FALLING
 
 
-func _get_state():
+func _get_state() -> int:
 	return _frog_state

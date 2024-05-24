@@ -45,10 +45,10 @@ position = Vector2(958.5, 1097)
 shape = SubResource("RectangleShape2D_oqhkv")
 
 [node name="Stump" parent="." instance=ExtResource("2_4wi48")]
-position = Vector2(376, 435)
+position = Vector2(616, 425)
 
 [node name="Flower" parent="." instance=ExtResource("4_vtfie")]
-position = Vector2(854, 384)
+position = Vector2(1266, 412)
 
 [node name="FrogSpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -67,6 +67,5 @@ shape = SubResource("RectangleShape2D_cjgjx")
 position = Vector2(2014, 447)
 shape = SubResource("RectangleShape2D_cjgjx")
 
-[connection signal="done_pampering" from="Stump" to="." method="_on_stump_done_pampering"]
-[connection signal="ready_to_pamper" from="Stump" to="." method="_on_stump_ready_to_pamper"]
+[connection signal="entered" from="Stump" to="." method="_on_stump_entered"]
 [connection signal="timeout" from="FrogSpawnTimer" to="." method="_on_frog_spawn_timer_timeout"]
