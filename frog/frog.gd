@@ -4,7 +4,7 @@ class_name Frog
 
 const SPEED : float = 100.0
 
-const WALK = preload("res://frog/walk.png")
+const WALK = preload("res://frog/idle.png")
 const IDLE = preload("res://frog/idle.png")
 const GRABBED = preload("res://frog/grabbed.png")
 const BEING_PAMPERED = preload("res://frog/being_pampered.png")

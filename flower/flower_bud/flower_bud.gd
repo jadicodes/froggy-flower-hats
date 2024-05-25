@@ -12,12 +12,12 @@ var _flower_state:
 	set(state):
 		if state == _growth_stages.UNGROWN:
 			$GrowthTimer.start()
-			$ColorRect.hide()
+			$Daisy.hide()
 		if state == _growth_stages.GROWN:
-			$ColorRect.show()
+			$Daisy.show()
 			global_position = _original_position
 		if state == _growth_stages.GRABBED:
-			$ColorRect.show()
+			$Daisy.show()
 		_flower_state = state
 
 
