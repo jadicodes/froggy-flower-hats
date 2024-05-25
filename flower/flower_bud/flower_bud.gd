@@ -33,6 +33,8 @@ func _ready() -> void:
 func _physics_process(_delta) -> void:
 	if _flower_state == _growth_stages.GRABBED:
 		global_position = get_global_mouse_position()
+	print(_flower_state)
+
 
 func _on_growth_timer_timeout() -> void:
 	_flower_state = _growth_stages.GROWN
@@ -45,4 +47,3 @@ func _on_input_event(_viewport, event, _shape_idx) -> void:
 	if _flower_state == _growth_stages.GRABBED and event.is_action_released("grab"):
 		_flower_state = _growth_stages.GROWN
 		z_index = 2
-

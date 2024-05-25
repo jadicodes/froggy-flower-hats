@@ -94,7 +94,7 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 
-func _reset_z_index() -> void:
+func _reset_z_index():
 	z_index = 3
 
 
@@ -141,9 +141,7 @@ func _on_falling_timer_timeout() -> void:
 
 
 func _on_grab_detector_area_entered(area) -> void:
-	print("Something was detected!")
-	if area is FlowerBud:
-		print("The something was a flower!")
+	if area is FlowerBud and _frog_state == 4:
 		area.queue_free()
 		$Hat.texture = DAISY
 
