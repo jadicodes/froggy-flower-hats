@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Frog
 
+signal _left
 
 const SPEED : float = 100.0
 
@@ -161,4 +162,5 @@ func _change_hat_position(pos : Vector2) -> void:
 
 
 func _on_visible_on_screen_notifier_screen_exited() -> void:
+	_left.emit()
 	queue_free()

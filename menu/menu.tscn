@@ -48,9 +48,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -572.0
-offset_top = 147.0
+offset_top = 151.0
 offset_right = 572.0
-offset_bottom = 326.0
+offset_bottom = 330.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 24
@@ -91,18 +91,18 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -175.0
-offset_top = -505.0
+offset_top = -496.0
 offset_right = 175.0
-offset_bottom = -255.0
+offset_bottom = -246.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("6_trw7a")
 
-[node name="Falling" type="Sprite2D" parent="."]
-position = Vector2(967, 550)
+[node name="Falling" type="Sprite2D" parent="TextureRect"]
+position = Vector2(175, -25)
 texture = ExtResource("9_fva28")
 
-[node name="DaisyHat" type="Sprite2D" parent="Falling"]
+[node name="DaisyHat" type="Sprite2D" parent="TextureRect/Falling"]
 position = Vector2(-2, -88)
 texture = ExtResource("10_g6ytm")
 
@@ -112,9 +112,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -95.0
-offset_top = 318.0
+offset_top = 324.0
 offset_right = 95.0
-offset_bottom = 416.0
+offset_bottom = 422.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 24
