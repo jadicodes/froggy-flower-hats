@@ -33,7 +33,6 @@ func _ready() -> void:
 func _physics_process(_delta) -> void:
 	if _flower_state == _growth_stages.GRABBED:
 		global_position = get_global_mouse_position()
-	print(_flower_state)
 
 
 func _on_growth_timer_timeout() -> void:

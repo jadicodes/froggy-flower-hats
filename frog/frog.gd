@@ -10,7 +10,7 @@ const GRABBED = preload("res://frog/grabbed.png")
 const BEING_PAMPERED = preload("res://frog/being_pampered.png")
 const FALLING = preload("res://frog/falling.png")
 
-const DAISY = preload("res://flower/flower_bud/daisy_hat.png")
+const DAISY = preload("res://frog/daisy_hat.png")
 
 enum frog_state {
 	WALK,
@@ -18,11 +18,13 @@ enum frog_state {
 	GRABBED,
 	FALLING,
 	BEING_PAMPERED,
+	DONE,
 }
 
 var _possible_times: Array = [3, 5]
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var _direction
+var _direction : int
+var _has_hat : bool = false
 
 var _frog_state:
 	set(state):
@@ -77,11 +79,17 @@ func _physics_process(delta) -> void:
 			_frog_state = frog_state.IDLE
 
 	if _frog_state == frog_state.WALK:
-		velocity.y += _gravity * delta
-		if _direction:
+		if _has_hat == true:
 			velocity.x = _direction * SPEED
+			$DecisionTimer.stop()
+			set_collision_mask_value(2, false)
+			$GrabDetector.input_pickable = false
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.y += _gravity * delta
+			if _direction:
+				velocity.x = _direction * SPEED
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	if _frog_state == frog_state.IDLE:
 		velocity.y += _gravity * delta
@@ -141,10 +149,15 @@ func _on_falling_timer_timeout() -> void:
 
 
 func _on_grab_detector_area_entered(area) -> void:
-	if area is FlowerBud and _frog_state == 4:
+	if area is FlowerBud and _frog_state == 4 and _has_hat == false:
 		area.queue_free()
 		$Hat.texture = DAISY
+		_has_hat = true
 
 
 func _change_hat_position(pos : Vector2) -> void:
 	$Hat.position = pos
+
+
+func _on_visible_on_screen_notifier_screen_exited():
+	queue_free()

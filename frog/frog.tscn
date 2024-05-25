@@ -13,7 +13,7 @@ height = 151.0
 
 [node name="Frog" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 17
+collision_mask = 19
 script = ExtResource("1_kwn76")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -41,7 +41,12 @@ wait_time = 0.15
 [node name="Hat" type="Sprite2D" parent="."]
 position = Vector2(-1, -86)
 
+[node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-3.5, 2.00001)
+scale = Vector2(9.75, 10.2)
+
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
 [connection signal="area_entered" from="GrabDetector" to="." method="_on_grab_detector_area_entered"]
 [connection signal="input_event" from="GrabDetector" to="." method="_on_grab_detector_input_event"]
 [connection signal="timeout" from="FallingTimer" to="." method="_on_falling_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier" to="." method="_on_visible_on_screen_notifier_screen_exited"]

@@ -32,8 +32,8 @@ grab={
 
 [layer_names]
 
-2d_physics/layer_1="world"
-2d_physics/layer_2="grabbed"
+2d_physics/layer_1="floor"
+2d_physics/layer_2="walls"
 2d_physics/layer_3="frogs"
 2d_physics/layer_4="detectable_frogs"
 2d_physics/layer_5="detectable_flower"
