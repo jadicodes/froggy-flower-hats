@@ -17,9 +17,4 @@ texture = ExtResource("2_qiht3")
 position = Vector2(-0.5, 1)
 shape = SubResource("CircleShape2D_6pbey")
 
-[node name="GrowthTimer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="timeout" from="GrowthTimer" to="." method="_on_growth_timer_timeout"]

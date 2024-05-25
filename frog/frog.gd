@@ -102,7 +102,7 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 
-func _reset_z_index():
+func _reset_z_index() -> void:
 	z_index = 3
 
 
@@ -159,5 +159,5 @@ func _change_hat_position(pos : Vector2) -> void:
 	$Hat.position = pos
 
 
-func _on_visible_on_screen_notifier_screen_exited():
+func _on_visible_on_screen_notifier_screen_exited() -> void:
 	queue_free()

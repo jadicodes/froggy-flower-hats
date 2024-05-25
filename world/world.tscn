@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://berrepmt8tedm" path="res://world/hill2.png" id="2_7x1nv"]
 [ext_resource type="Texture2D" uid="uid://ou7hfiwfvdor" path="res://world/hill1.png" id="2_fpfbt"]
 [ext_resource type="Texture2D" uid="uid://d34y6acavv2y0" path="res://world/floor.png" id="4_mnsgi"]
-[ext_resource type="PackedScene" uid="uid://ddqjscxeq8bvu" path="res://flower/flower.tscn" id="4_vtfie"]
+[ext_resource type="PackedScene" uid="uid://ddqjscxeq8bvu" path="res://flower/bush.tscn" id="4_vtfie"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqhkv"]
 size = Vector2(2705, 412.75)
@@ -53,15 +53,14 @@ position = Vector2(1609, 270)
 [node name="Stump3" parent="." instance=ExtResource("2_4wi48")]
 position = Vector2(183, 334)
 
-[node name="Flower" parent="." instance=ExtResource("4_vtfie")]
+[node name="Bush" parent="." instance=ExtResource("4_vtfie")]
 position = Vector2(1068, 719)
 
-[node name="Flower2" parent="." instance=ExtResource("4_vtfie")]
+[node name="Bush2" parent="." instance=ExtResource("4_vtfie")]
 position = Vector2(719, 436)
 
 [node name="FrogSpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
-one_shot = true
 autostart = true
 
 [node name="Walls" type="StaticBody2D" parent="."]
@@ -75,8 +74,6 @@ shape = SubResource("RectangleShape2D_cjgjx")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
 position = Vector2(2014, 447)
 shape = SubResource("RectangleShape2D_cjgjx")
-
-[node name="Node" type="Node" parent="."]
 
 [connection signal="entered" from="Stump" to="." method="_on_stump_entered"]
 [connection signal="entered" from="Stump2" to="." method="_on_stump_entered"]

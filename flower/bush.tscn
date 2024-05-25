@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddqjscxeq8bvu"]
+
+[ext_resource type="Texture2D" uid="uid://bga72i0r1n20s" path="res://flower/bush.png" id="1_gn265"]
+[ext_resource type="Script" path="res://flower/bush.gd" id="1_r1ecy"]
+[ext_resource type="PackedScene" uid="uid://bp8xe1smm6flq" path="res://flower/flower_bud_marker.tscn" id="3_p4286"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2a3op"]
+size = Vector2(187, 216)
+
+[node name="Bush" type="Area2D"]
+script = ExtResource("1_r1ecy")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(-14.5, 16)
+shape = SubResource("RectangleShape2D_2a3op")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_gn265")
+
+[node name="GrowthTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="FlowerBudMarker" parent="." instance=ExtResource("3_p4286")]
+position = Vector2(-59, -38)
+
+[node name="FlowerBudMarker2" parent="." instance=ExtResource("3_p4286")]
+position = Vector2(86, 2)
+
+[node name="FlowerBudMarker3" parent="." instance=ExtResource("3_p4286")]
+position = Vector2(-9, 47)
+
+[connection signal="timeout" from="GrowthTimer" to="." method="_on_growth_timer_timeout"]

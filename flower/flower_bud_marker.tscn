@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp8xe1smm6flq"]
+
+[ext_resource type="Script" path="res://flower/flower_bud_marker.gd" id="1_j51ym"]
+
+[node name="FlowerBudMarker" type="Marker2D"]
+script = ExtResource("1_j51ym")
