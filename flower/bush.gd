@@ -4,7 +4,16 @@ const _MAX_FLOWERS: int = 3
 
 var _flower_bud : FlowerBud
 var _current_flowers = 0
+var _possible_times: Array = [3, 5, 7]
 @onready var _markers: Array = [$FlowerBudMarker, $FlowerBudMarker2, $FlowerBudMarker3]
+
+
+func _ready():
+	_set_timer()
+
+
+func _set_timer() -> void:
+	$GrowthTimer.wait_time = _possible_times.pick_random()
 
 
 func _grow_flower() -> void:
@@ -12,6 +21,7 @@ func _grow_flower() -> void:
 	call_deferred("add_child", _flower_bud)
 	_flower_bud.global_position = _find_position()
 	_current_flowers += 1
+	_set_timer()
 
 
 func _on_growth_timer_timeout() -> void:

@@ -21,7 +21,7 @@ enum frog_state {
 	DONE,
 }
 
-var _possible_times: Array = [3, 5]
+var _possible_times: Array = [2, 3, 5]
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _direction : int
 var _has_hat : bool = false
@@ -40,6 +40,7 @@ var _frog_state:
 			set_collision_layer_value(4, false)
 			_reset_z_index()
 			_change_hat_position(Vector2(-2, -63))
+			_set_timer()
 
 		if state == frog_state.GRABBED:
 			_set_sprite_texture(GRABBED)
