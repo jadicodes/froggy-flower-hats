@@ -10,6 +10,8 @@ const GRABBED = preload("res://frog/grabbed.png")
 const BEING_PAMPERED = preload("res://frog/being_pampered.png")
 const FALLING = preload("res://frog/falling.png")
 
+const DAISY = preload("res://flower/flower_bud/daisy_hat.png")
+
 enum frog_state {
 	WALK,
 	IDLE,
@@ -28,27 +30,31 @@ var _frog_state:
 			_set_sprite_texture(WALK)
 			_direction = [1, -1].pick_random()
 			set_collision_layer_value(4, false)
+			_change_hat_position(Vector2(-2, -63))
 			_reset_z_index()
 
 		if state == frog_state.IDLE:
 			_set_sprite_texture(IDLE)
 			set_collision_layer_value(4, false)
 			_reset_z_index()
+			_change_hat_position(Vector2(-2, -63))
 
 		if state == frog_state.GRABBED:
 			_set_sprite_texture(GRABBED)
 			set_collision_layer_value(4, false)
 			z_index = 10
+			_change_hat_position(Vector2(-2, -88))
 
 		if state == frog_state.FALLING:
 			$FallingTimer.start()
 			set_collision_layer_value(4, true)
+			_change_hat_position(Vector2(-2, -88))
 
 		if state == frog_state.BEING_PAMPERED:
 			_set_sprite_texture(BEING_PAMPERED)
 			set_collision_layer_value(4, true)
 			_reset_z_index()
-			_set_timer()
+			_change_hat_position(Vector2(-2, -63))
 
 		_frog_state = state
 
@@ -88,7 +94,7 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 
-func _reset_z_index():
+func _reset_z_index() -> void:
 	z_index = 3
 
 
@@ -129,6 +135,18 @@ func _get_state() -> int:
 	return _frog_state
 
 
-func _on_falling_timer_timeout():
+func _on_falling_timer_timeout() -> void:
 	if _get_state() == 3:
 		_set_sprite_texture(FALLING)
+
+
+func _on_grab_detector_area_entered(area) -> void:
+	print("Something was detected!")
+	if area is FlowerBud:
+		print("The something was a flower!")
+		area.queue_free()
+		$Hat.texture = DAISY
+
+
+func _change_hat_position(pos : Vector2) -> void:
+	$Hat.position = pos
