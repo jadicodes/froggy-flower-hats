@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Froggy Flower Hats"
-run/main_scene="res://world/world.tscn"
+run/main_scene="res://menu/menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Jukebox="*res://jukebox/jukebox.tscn"
 
 [display]
 

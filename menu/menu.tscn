@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=3 uid="uid://decpclhug788o"]
+
+[ext_resource type="Texture2D" uid="uid://berrepmt8tedm" path="res://world/hill2.png" id="1_bddeo"]
+[ext_resource type="Script" path="res://menu/menu.gd" id="1_thvw0"]
+[ext_resource type="Texture2D" uid="uid://ou7hfiwfvdor" path="res://world/hill1.png" id="2_iw2ed"]
+[ext_resource type="Texture2D" uid="uid://d34y6acavv2y0" path="res://world/floor.png" id="3_ruoo5"]
+[ext_resource type="FontFile" uid="uid://bko5wn406gpvg" path="res://raw_assets/Sancreek-Regular.ttf" id="4_1qgco"]
+[ext_resource type="Texture2D" uid="uid://b6jsgpx8u7ch3" path="res://frog/being_pampered.png" id="5_s032q"]
+[ext_resource type="Texture2D" uid="uid://di6u48ru762k0" path="res://stump/empty.png" id="6_trw7a"]
+[ext_resource type="Texture2D" uid="uid://bga72i0r1n20s" path="res://flower/bush.png" id="7_vyayd"]
+[ext_resource type="Texture2D" uid="uid://bayh63oycbous" path="res://flower/flower_bud/daisy.png" id="8_2k0j4"]
+[ext_resource type="Texture2D" uid="uid://c6pegjxtia2c7" path="res://frog/falling.png" id="9_fva28"]
+[ext_resource type="Texture2D" uid="uid://wypjgovtf3co" path="res://frog/daisy_hat.png" id="10_g6ytm"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_thvw0")
+
+[node name="Sky" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -171.0
+offset_top = -113.0
+offset_right = 2063.0
+offset_bottom = 611.0
+mouse_filter = 2
+color = Color(0.505882, 0.878431, 0.890196, 1)
+
+[node name="Hill2" type="Sprite2D" parent="."]
+position = Vector2(1154, 607)
+texture = ExtResource("1_bddeo")
+
+[node name="Hill1" type="Sprite2D" parent="."]
+position = Vector2(1011, 566)
+texture = ExtResource("2_iw2ed")
+
+[node name="FloorSprite" type="Sprite2D" parent="."]
+position = Vector2(962, 1051)
+texture = ExtResource("3_ruoo5")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -572.0
+offset_top = 147.0
+offset_right = 572.0
+offset_bottom = 326.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("4_1qgco")
+theme_override_font_sizes/font_size = 128
+text = "Froggy Flower Hats"
+
+[node name="BeingPampered" type="Sprite2D" parent="."]
+position = Vector2(193, 304)
+texture = ExtResource("5_s032q")
+
+[node name="Empty2" type="Sprite2D" parent="."]
+position = Vector2(1751, 214)
+texture = ExtResource("6_trw7a")
+
+[node name="Bush" type="Sprite2D" parent="."]
+position = Vector2(293, 830)
+texture = ExtResource("7_vyayd")
+
+[node name="Bush2" type="Sprite2D" parent="."]
+position = Vector2(1728, 838)
+texture = ExtResource("7_vyayd")
+
+[node name="Daisy" type="Sprite2D" parent="Bush2"]
+position = Vector2(78, 41)
+texture = ExtResource("8_2k0j4")
+
+[node name="Daisy2" type="Sprite2D" parent="Bush2"]
+position = Vector2(-42, -43)
+texture = ExtResource("8_2k0j4")
+flip_h = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -175.0
+offset_top = -505.0
+offset_right = 175.0
+offset_bottom = -255.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("6_trw7a")
+
+[node name="Falling" type="Sprite2D" parent="."]
+position = Vector2(967, 550)
+texture = ExtResource("9_fva28")
+
+[node name="DaisyHat" type="Sprite2D" parent="Falling"]
+position = Vector2(-2, -88)
+texture = ExtResource("10_g6ytm")
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -95.0
+offset_top = 318.0
+offset_right = 95.0
+offset_bottom = 416.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("4_1qgco")
+theme_override_font_sizes/font_size = 64
+text = "Play!"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

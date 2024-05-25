@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://biaumdok2mfli"]
+
+[ext_resource type="Script" path="res://jukebox/jukebox.gd" id="1_n6483"]
+[ext_resource type="AudioStream" uid="uid://clhev11bcw6rm" path="res://raw_assets/gone_fishin_by_memoraphile_CC0.mp3" id="2_4k7gr"]
+
+[node name="Jukebox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_n6483")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_4k7gr")

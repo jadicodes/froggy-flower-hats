@@ -2,7 +2,6 @@ extends Area2D
 
 signal entered(frog, marker_position)
 
-const FULL_TEXTURE = preload("res://stump/full.png")
 const EMPTY_TEXTURE = preload("res://stump/empty.png")
 
 var _is_empty : bool
