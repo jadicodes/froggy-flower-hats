@@ -22,7 +22,7 @@ enum frog_state {
 	DONE,
 }
 
-var _possible_times: Array = [2, 3, 5]
+var _possible_times: Array = [1, 2, 3, 5, 8]
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _direction : int
 var _has_hat : bool = false
@@ -31,10 +31,15 @@ var _frog_state:
 	set(state):
 		if state == frog_state.WALK:
 			_set_sprite_texture(WALK)
-			_direction = [1, -1].pick_random()
 			set_collision_layer_value(4, false)
 			_change_hat_position(Vector2(-2, -63))
 			_reset_z_index()
+			if $RayCastLeft.is_colliding():
+				print("Collided left")
+				_direction = 1
+			if $RayCastRight.is_colliding():
+				print("Collided right")
+				_direction = -1
 
 		if state == frog_state.IDLE:
 			_set_sprite_texture(IDLE)
@@ -88,10 +93,7 @@ func _physics_process(delta) -> void:
 			$GrabDetector.input_pickable = false
 		else:
 			velocity.y += _gravity * delta
-			if _direction:
-				velocity.x = _direction * SPEED
-			else:
-				velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.x = _direction * SPEED
 
 	if _frog_state == frog_state.IDLE:
 		velocity.y += _gravity * delta

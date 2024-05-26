@@ -60,7 +60,7 @@ position = Vector2(1068, 719)
 position = Vector2(719, 436)
 
 [node name="FrogSpawnTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 6.0
 autostart = true
 
 [node name="Walls" type="StaticBody2D" parent="."]
@@ -68,11 +68,11 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
-position = Vector2(-95, 467.5)
+position = Vector2(-290, 468)
 shape = SubResource("RectangleShape2D_cjgjx")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
-position = Vector2(2014, 447)
+position = Vector2(2208, 469)
 shape = SubResource("RectangleShape2D_cjgjx")
 
 [connection signal="entered" from="Stump" to="." method="_on_stump_entered"]

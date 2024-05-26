@@ -4,6 +4,7 @@ const _MAX_FROGS = 4
 
 var _frog: Frog
 var _current_frogs: int = 0
+var _spawn_locations: Array = [Vector2(-97, 810), Vector2(2018, 809)]
 
 func _ready() -> void:
 	_make_new_frog()
@@ -12,7 +13,7 @@ func _ready() -> void:
 func _make_new_frog() -> void:
 	_frog = preload("res://frog/frog.tscn").instantiate()
 	call_deferred("add_child", _frog)
-	_frog.global_position = Vector2(320, 660)
+	_frog.global_position = _spawn_locations.pick_random()
 	_frog._left.connect(_subtract_frog)
 
 
