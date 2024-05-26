@@ -99,7 +99,7 @@ mouse_filter = 2
 color = Color(0.505882, 0.878431, 0.890196, 1)
 
 [node name="Hill2" type="Sprite2D" parent="Background"]
-position = Vector2(1154, 618)
+position = Vector2(1154, 628)
 texture = ExtResource("1_bddeo")
 
 [node name="Hill1" type="Sprite2D" parent="Background"]
@@ -115,7 +115,7 @@ position = Vector2(193, 311)
 texture = ExtResource("5_s032q")
 
 [node name="Empty2" type="Sprite2D" parent="Background"]
-position = Vector2(1751, 227)
+position = Vector2(1751, 237)
 texture = ExtResource("6_trw7a")
 
 [node name="Bush" type="Sprite2D" parent="Background"]
@@ -163,9 +163,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -572.0
+offset_left = 388.0
 offset_top = 141.0
-offset_right = 572.0
+offset_right = 1532.0
 offset_bottom = 320.001
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)

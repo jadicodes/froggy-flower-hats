@@ -2,7 +2,7 @@ extends Node2D
 
 const _MAX_FROGS = 4
 
-@onready var _animation_player = $AnimationPlayer
+@onready var _animation_player = $FadeFromBlack
 
 var _frog: Frog
 var _current_frogs: int = 0
@@ -33,3 +33,7 @@ func _on_stump_entered(frog, marker_position) -> void:
 
 func _subtract_frog() -> void:
 	_current_frogs -= 1
+
+
+func _on_ok_button_pressed():
+	$Instructions.hide()
