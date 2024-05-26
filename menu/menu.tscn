@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://decpclhug788o"]
+[gd_scene load_steps=16 format=3 uid="uid://decpclhug788o"]
 
 [ext_resource type="Texture2D" uid="uid://berrepmt8tedm" path="res://world/hill2.png" id="1_bddeo"]
 [ext_resource type="Script" path="res://menu/menu.gd" id="1_thvw0"]
@@ -12,6 +12,73 @@
 [ext_resource type="Texture2D" uid="uid://c6pegjxtia2c7" path="res://frog/falling.png" id="9_fva28"]
 [ext_resource type="Texture2D" uid="uid://wypjgovtf3co" path="res://frog/daisy_hat.png" id="10_g6ytm"]
 
+[sub_resource type="Animation" id="Animation_fauni"]
+resource_name = "title"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(388, 70), Vector2(388, 90)]
+}
+
+[sub_resource type="Animation" id="Animation_0e7fn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(388, 141)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r7cju"]
+resource_name = "fade_to_black"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_si2sj"]
+_data = {
+"RESET": SubResource("Animation_0e7fn"),
+"fade_to_black": SubResource("Animation_r7cju"),
+"title": SubResource("Animation_fauni")
+}
+
 [node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -21,8 +88,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_thvw0")
 
-[node name="Sky" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="Background" type="Node" parent="."]
+
+[node name="Sky" type="ColorRect" parent="Background"]
 offset_left = -171.0
 offset_top = -113.0
 offset_right = 2063.0
@@ -30,27 +98,75 @@ offset_bottom = 611.0
 mouse_filter = 2
 color = Color(0.505882, 0.878431, 0.890196, 1)
 
-[node name="Hill2" type="Sprite2D" parent="."]
-position = Vector2(1154, 607)
+[node name="Hill2" type="Sprite2D" parent="Background"]
+position = Vector2(1154, 618)
 texture = ExtResource("1_bddeo")
 
-[node name="Hill1" type="Sprite2D" parent="."]
-position = Vector2(1011, 566)
+[node name="Hill1" type="Sprite2D" parent="Background"]
+position = Vector2(1011, 570)
 texture = ExtResource("2_iw2ed")
 
-[node name="FloorSprite" type="Sprite2D" parent="."]
+[node name="FloorSprite" type="Sprite2D" parent="Background"]
 position = Vector2(962, 1051)
 texture = ExtResource("3_ruoo5")
 
+[node name="BeingPampered" type="Sprite2D" parent="Background"]
+position = Vector2(193, 311)
+texture = ExtResource("5_s032q")
+
+[node name="Empty2" type="Sprite2D" parent="Background"]
+position = Vector2(1751, 227)
+texture = ExtResource("6_trw7a")
+
+[node name="Bush" type="Sprite2D" parent="Background"]
+position = Vector2(293, 830)
+texture = ExtResource("7_vyayd")
+
+[node name="Bush2" type="Sprite2D" parent="Background"]
+position = Vector2(1728, 838)
+texture = ExtResource("7_vyayd")
+
+[node name="Daisy" type="Sprite2D" parent="Background/Bush2"]
+position = Vector2(78, 41)
+texture = ExtResource("8_2k0j4")
+
+[node name="Daisy2" type="Sprite2D" parent="Background/Bush2"]
+position = Vector2(-42, -43)
+texture = ExtResource("8_2k0j4")
+flip_h = true
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -175.0
+offset_top = -517.0
+offset_right = 175.0
+offset_bottom = -267.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("6_trw7a")
+
+[node name="Falling" type="Sprite2D" parent="Background/TextureRect"]
+position = Vector2(175, -25)
+texture = ExtResource("9_fva28")
+
+[node name="DaisyHat" type="Sprite2D" parent="Background/TextureRect/Falling"]
+position = Vector2(-2, -88)
+texture = ExtResource("10_g6ytm")
+
 [node name="Label" type="Label" parent="."]
+z_index = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -572.0
-offset_top = 151.0
+offset_top = 141.0
 offset_right = 572.0
-offset_bottom = 330.0
+offset_bottom = 320.001
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 24
@@ -58,63 +174,16 @@ theme_override_fonts/font = ExtResource("4_1qgco")
 theme_override_font_sizes/font_size = 128
 text = "Froggy Flower Hats"
 
-[node name="BeingPampered" type="Sprite2D" parent="."]
-position = Vector2(193, 304)
-texture = ExtResource("5_s032q")
-
-[node name="Empty2" type="Sprite2D" parent="."]
-position = Vector2(1751, 214)
-texture = ExtResource("6_trw7a")
-
-[node name="Bush" type="Sprite2D" parent="."]
-position = Vector2(293, 830)
-texture = ExtResource("7_vyayd")
-
-[node name="Bush2" type="Sprite2D" parent="."]
-position = Vector2(1728, 838)
-texture = ExtResource("7_vyayd")
-
-[node name="Daisy" type="Sprite2D" parent="Bush2"]
-position = Vector2(78, 41)
-texture = ExtResource("8_2k0j4")
-
-[node name="Daisy2" type="Sprite2D" parent="Bush2"]
-position = Vector2(-42, -43)
-texture = ExtResource("8_2k0j4")
-flip_h = true
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -175.0
-offset_top = -496.0
-offset_right = 175.0
-offset_bottom = -246.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("6_trw7a")
-
-[node name="Falling" type="Sprite2D" parent="TextureRect"]
-position = Vector2(175, -25)
-texture = ExtResource("9_fva28")
-
-[node name="DaisyHat" type="Sprite2D" parent="TextureRect/Falling"]
-position = Vector2(-2, -88)
-texture = ExtResource("10_g6ytm")
-
-[node name="PlayButton" type="Button" parent="."]
+[node name="PlayButton" type="Button" parent="Label"]
+z_index = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -95.0
-offset_top = 324.0
+offset_top = 175.694
 offset_right = 95.0
-offset_bottom = 422.0
+offset_bottom = 273.694
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 24
@@ -122,4 +191,18 @@ theme_override_fonts/font = ExtResource("4_1qgco")
 theme_override_font_sizes/font_size = 64
 text = "Play!"
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_si2sj")
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 5
+layout_mode = 0
+offset_right = 1944.0
+offset_bottom = 1093.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[connection signal="pressed" from="Label/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

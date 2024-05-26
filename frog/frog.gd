@@ -35,10 +35,8 @@ var _frog_state:
 			_change_hat_position(Vector2(-2, -63))
 			_reset_z_index()
 			if $RayCastLeft.is_colliding():
-				print("Collided left")
 				_direction = 1
 			if $RayCastRight.is_colliding():
-				print("Collided right")
 				_direction = -1
 
 		if state == frog_state.IDLE:

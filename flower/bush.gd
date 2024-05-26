@@ -4,7 +4,7 @@ const _MAX_FLOWERS: int = 3
 
 var _flower_bud : FlowerBud
 var _current_flowers = 0
-var _possible_times: Array = [3, 5, 7]
+var _possible_times: Array = [3, 5, 7, 8, 9]
 @onready var _markers: Array = [$FlowerBudMarker, $FlowerBudMarker2, $FlowerBudMarker3]
 
 
