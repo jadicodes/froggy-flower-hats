@@ -5,6 +5,7 @@ signal _left
 
 const SPEED : float = 100.0
 const DAISY = preload("res://frog/daisy_hat.png")
+const ROSE = preload("res://frog/rose_hat.png")
 
 enum frog_state {
 	WALK,
@@ -19,6 +20,8 @@ enum frog_state {
 var _possible_times: Array = [2, 3, 5, 8, 9]
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _direction : int
+var _flowers: Array = ["daisy", "rose"]
+var _flower_choice = _flowers.pick_random()
 var _has_hat : bool = false
 
 var _frog_state:
@@ -46,7 +49,7 @@ var _frog_state:
 			$FallingTimer.start()
 
 		if state == frog_state.BEING_PAMPERED:
-			_set_properties(4, true, Vector2(-2, -63), 3, "pampered", "daisy")
+			_set_properties(4, true, Vector2(-2, -63), 3, "pampered", _flower_choice)
 
 		_frog_state = state
 
@@ -103,6 +106,10 @@ func _set_properties(_collision_layer: int, true_or_false: bool, hat_position: V
 	$ThoughtBubble.play(bubble_animation)
 
 
+func _set_hat(flower):
+	$Hat.texture = flower
+
+
 func _set_timer() -> void:
 	$DecisionTimer.wait_time = _possible_times.pick_random()
 
@@ -154,9 +161,13 @@ func _on_grab_detector_input_event(_viewport, event, _shape_idx) -> void:
 
 func _on_grab_detector_area_entered(area) -> void:
 	if area is FlowerBud and _frog_state == 5 and _has_hat == false:
-		area.queue_free()
-		$Hat.texture = DAISY
-		_has_hat = true
+		if _flower_choice == area._get_flower_type():
+			if _flower_choice == "daisy":
+				$Hat.texture = DAISY
+			if _flower_choice == "rose":
+				$Hat.texture = ROSE
+			area.queue_free()
+			_has_hat = true
 
 
 func _on_visible_on_screen_notifier_screen_exited() -> void:

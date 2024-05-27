@@ -48,6 +48,10 @@ func _set_flower_type(type):
 		_flower_type = "rose"
 
 
+func _get_flower_type():
+	return _flower_type
+
+
 func _set_textures():
 	if _flower_type == "daisy":
 		$Sprite.texture = DAISY

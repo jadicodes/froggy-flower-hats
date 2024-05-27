@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://f3pn7ii05tq3"]
+[gd_scene load_steps=20 format=3 uid="uid://f3pn7ii05tq3"]
 
 [ext_resource type="Script" path="res://frog/frog.gd" id="1_kwn76"]
 [ext_resource type="Texture2D" uid="uid://c6pegjxtia2c7" path="res://frog/falling.png" id="2_0mk06"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dou5if3hjx1gl" path="res://frog/think2.png" id="10_5erxw"]
 [ext_resource type="Texture2D" uid="uid://6wnvms1g3ygg" path="res://frog/nothing.png" id="10_ed8ne"]
 [ext_resource type="Texture2D" uid="uid://g837g7lanqae" path="res://frog/think3.png" id="11_fxrcc"]
+[ext_resource type="Texture2D" uid="uid://cplpacongxhyk" path="res://frog/rose_bubble.png" id="11_qsky0"]
 [ext_resource type="AudioStream" uid="uid://cui3on5s0jwkk" path="res://frog/495644__robbeman__mug_wood2.wav" id="14_8t4oo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mqs6j"]
@@ -97,6 +98,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("11_qsky0")
+}],
+"loop": true,
+"name": &"rose",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("9_jcwrn")
 }, {
 "duration": 1.0,
@@ -140,6 +149,7 @@ animation = &"pampered"
 [node name="ThoughtBubble" type="AnimatedSprite2D" parent="."]
 position = Vector2(117, -64)
 sprite_frames = SubResource("SpriteFrames_o1yvu")
+animation = &"rose"
 
 [node name="Hat" type="Sprite2D" parent="."]
 position = Vector2(-1, -86)
