@@ -1,18 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://mqrwr7a0kced"]
+[gd_scene load_steps=7 format=3 uid="uid://mqrwr7a0kced"]
 
 [ext_resource type="Script" path="res://flower/flower_bud/flower_bud.gd" id="1_dalgt"]
 [ext_resource type="Texture2D" uid="uid://bayh63oycbous" path="res://flower/flower_bud/daisy.png" id="2_qiht3"]
 [ext_resource type="Texture2D" uid="uid://ddvr637cha0qm" path="res://flower/flower_bud/petal_white.png" id="3_ag6ep"]
+[ext_resource type="AudioStream" uid="uid://yc7kg8k6smhm" path="res://flower/flower_bud/536767__egomassive__rustle.ogg" id="4_rxjfn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6pbey"]
 radius = 28.5701
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qmief"]
 particle_flag_disable_z = true
-angular_velocity_min = 16.18
-angular_velocity_max = 97.08
-radial_velocity_min = 22.48
-radial_velocity_max = 157.31
+angular_velocity_min = 20.0
+angular_velocity_max = 75.0
+radial_velocity_max = 100.0
 gravity = Vector3(0, 98, 0)
 
 [node name="FlowerBud" type="Area2D"]
@@ -27,13 +27,19 @@ position = Vector2(-0.5, 1)
 shape = SubResource("CircleShape2D_6pbey")
 
 [node name="WhitePetals" type="GPUParticles2D" parent="."]
+z_index = 16
+position = Vector2(1, -14)
 emitting = false
-amount = 5
+amount = 6
 process_material = SubResource("ParticleProcessMaterial_qmief")
 texture = ExtResource("3_ag6ep")
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
+
+[node name="Rustle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rxjfn")
+volume_db = -10.0
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="finished" from="WhitePetals" to="." method="_on_white_petals_finished"]

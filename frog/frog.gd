@@ -39,6 +39,7 @@ var _frog_state:
 
 		if state == frog_state.THINKING:
 			_set_properties(4, true, Vector2(-1, -63), 3, "thinking", "thinking")
+			$Thunk.play()
 
 		if state == frog_state.FALLING:
 			_set_properties(4, true, Vector2(-2, -88), 10, "grabbed", "default")
@@ -120,6 +121,10 @@ func _set_state(state: int) -> void:
 
 func _get_state() -> int:
 	return _frog_state
+
+
+func _get_has_hat():
+	return _has_hat
 
 
 func _on_decision_timer_timeout() -> void:

@@ -20,6 +20,7 @@ var _flower_state:
 			set_collision_layer_value(6, false)
 		if state == _growth_stages.DEAD:
 			$Daisy.hide()
+			$Rustle.play()
 			$WhitePetals.emitting = true
 		_flower_state = state
 

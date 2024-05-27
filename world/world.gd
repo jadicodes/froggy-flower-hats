@@ -28,8 +28,11 @@ func _on_frog_spawn_timer_timeout() -> void:
 
 
 func _on_stump_entered(frog, marker_position) -> void:
-	frog._set_state(4)
-	frog._set_position(marker_position)
+	if not frog._get_has_hat():
+		frog._set_state(4)
+		frog._set_position(marker_position)
+	else:
+		pass
 
 
 func _subtract_frog() -> void:
