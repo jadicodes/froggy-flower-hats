@@ -7,7 +7,13 @@ enum _growth_stages {
 	DEAD
 }
 
+const DAISY = preload("res://flower/flower_bud/daisy.png")
+const WHITE = preload("res://flower/flower_bud/petal_white.png")
+const ROSE = preload("res://flower/flower_bud/rose.png")
+const RED = preload("res://flower/flower_bud/petal_red.png")
+
 var _original_position
+var _flower_type: String
 
 var _flower_state:
 	set(state):
@@ -19,19 +25,36 @@ var _flower_state:
 			set_collision_layer_value(5, true)
 			set_collision_layer_value(6, false)
 		if state == _growth_stages.DEAD:
-			$Daisy.hide()
+			$Sprite.hide()
 			$Rustle.play()
-			$WhitePetals.emitting = true
+			$Petals.emitting = true
 		_flower_state = state
 
 
 func _ready() -> void:
+	_set_textures()
 	_flower_state = _growth_stages.GROWN
 
 
 func _physics_process(_delta) -> void:
 	if _flower_state == _growth_stages.GRABBED:
 		global_position = get_global_mouse_position()
+
+
+func _set_flower_type(type):
+	if type == 1:
+		_flower_type = "daisy"
+	if type == 2:
+		_flower_type = "rose"
+
+
+func _set_textures():
+	if _flower_type == "daisy":
+		$Sprite.texture = DAISY
+		$Petals.texture = WHITE
+	else:
+		$Sprite.texture = ROSE
+		$Petals.texture = RED
 
 
 func _on_input_event(_viewport, event, _shape_idx) -> void:

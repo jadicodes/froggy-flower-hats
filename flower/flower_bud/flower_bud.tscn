@@ -18,7 +18,7 @@ gravity = Vector3(0, 98, 0)
 [node name="FlowerBud" type="Area2D"]
 script = ExtResource("1_dalgt")
 
-[node name="Daisy" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(1, 2)
 texture = ExtResource("2_qiht3")
 
@@ -26,7 +26,7 @@ texture = ExtResource("2_qiht3")
 position = Vector2(-0.5, 1)
 shape = SubResource("CircleShape2D_6pbey")
 
-[node name="WhitePetals" type="GPUParticles2D" parent="."]
+[node name="Petals" type="GPUParticles2D" parent="."]
 z_index = 16
 position = Vector2(1, -14)
 emitting = false
@@ -42,4 +42,4 @@ stream = ExtResource("4_rxjfn")
 volume_db = -10.0
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="finished" from="WhitePetals" to="." method="_on_white_petals_finished"]
+[connection signal="finished" from="Petals" to="." method="_on_white_petals_finished"]

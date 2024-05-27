@@ -1,6 +1,7 @@
 extends Area2D
 
 const _MAX_FLOWERS: int = 3
+@export_range(0, 2, 1) var _flower_type
 
 var _flower_bud : FlowerBud
 var _current_flowers = 0
@@ -19,6 +20,7 @@ func _set_timer() -> void:
 func _grow_flower() -> void:
 	_flower_bud = preload("res://flower/flower_bud/flower_bud.tscn").instantiate()
 	call_deferred("add_child", _flower_bud)
+	_flower_bud._set_flower_type(_flower_type)
 	_flower_bud.global_position = _find_position()
 	_flower_bud._set_original_position(_flower_bud.global_position)
 	_current_flowers += 1

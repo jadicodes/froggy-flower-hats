@@ -111,9 +111,11 @@ position = Vector2(183, 334)
 
 [node name="Bush" parent="." instance=ExtResource("4_vtfie")]
 position = Vector2(1068, 719)
+_flower_type = 1.0
 
 [node name="Bush2" parent="." instance=ExtResource("4_vtfie")]
 position = Vector2(719, 436)
+_flower_type = 2.0
 
 [node name="FrogSpawnTimer" type="Timer" parent="."]
 wait_time = 6.0
