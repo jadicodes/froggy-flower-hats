@@ -16,7 +16,7 @@ enum frog_state {
 	DONE,
 }
 
-var _possible_times: Array = [1, 2, 3, 5, 8]
+var _possible_times: Array = [2, 3, 5, 8, 9]
 var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _direction : int
 var _has_hat : bool = false
@@ -24,46 +24,28 @@ var _has_hat : bool = false
 var _frog_state:
 	set(state):
 		if state == frog_state.WALK:
-			$AnimatedSprite.play("walk")
-			set_collision_layer_value(4, false)
-			_change_hat_position(Vector2(-1, -63))
-			_reset_z_index()
+			_set_properties(4, false, Vector2(-1, -63), 3, "walk", "default")
 			if $RayCastLeft.is_colliding():
 				_direction = 1
 			if $RayCastRight.is_colliding():
 				_direction = -1
 
 		if state == frog_state.IDLE:
-			$AnimatedSprite.play("idle")
-			set_collision_layer_value(4, false)
-			_reset_z_index()
-			_change_hat_position(Vector2(-2, -63))
+			_set_properties(4, false, Vector2(-1, -63), 3, "idle", "default")
 			_set_timer()
 
 		if state == frog_state.GRABBED:
-			$AnimatedSprite.play("grabbed")
-			set_collision_layer_value(4, false)
-			z_index = 10
-			_change_hat_position(Vector2(-2, -88))
+			_set_properties(4, false, Vector2(-2, -88), 10, "grabbed", "default")
 
 		if state == frog_state.THINKING:
-			$AnimatedSprite.play("thinking")
-			set_collision_layer_value(4, true)
-			_reset_z_index()
-			_change_hat_position(Vector2(-2, -63))
-			$ThoughtBubble.play("thinking")
+			_set_properties(4, true, Vector2(-1, -63), 3, "thinking", "thinking")
 
 		if state == frog_state.FALLING:
+			_set_properties(4, true, Vector2(-2, -88), 10, "grabbed", "default")
 			$FallingTimer.start()
-			set_collision_layer_value(4, true)
-			_change_hat_position(Vector2(-2, -88))
 
 		if state == frog_state.BEING_PAMPERED:
-			$AnimatedSprite.play("pampered")
-			set_collision_layer_value(4, true)
-			_reset_z_index()
-			_change_hat_position(Vector2(-2, -63))
-			$ThoughtBubble.play("daisy")
+			_set_properties(4, true, Vector2(-2, -63), 3, "pampered", "daisy")
 
 		_frog_state = state
 
@@ -112,24 +94,32 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 
-func _reset_z_index() -> void:
-	z_index = 3
-
-
-func _set_state(state: int) -> void:
-	_frog_state = state
+func _set_properties(_collision_layer: int, true_or_false: bool, hat_position: Vector2, z: int, frog_animation: String, bubble_animation):
+	set_collision_layer_value(_collision_layer, true_or_false)
+	_set_hat_position(hat_position)
+	z_index = z
+	$AnimatedSprite.play(frog_animation)
+	$ThoughtBubble.play(bubble_animation)
 
 
 func _set_timer() -> void:
 	$DecisionTimer.wait_time = _possible_times.pick_random()
 
 
-func _set_sprite_texture(texture: CompressedTexture2D) -> void:
-	$Sprite.texture = texture
-
-
 func _set_position(marker_position) -> void:
 	global_position = marker_position
+
+
+func _set_hat_position(pos : Vector2) -> void:
+	$Hat.position = pos
+
+
+func _set_state(state: int) -> void:
+	_frog_state = state
+
+
+func _get_state() -> int:
+	return _frog_state
 
 
 func _on_decision_timer_timeout() -> void:
@@ -145,6 +135,11 @@ func _on_decision_timer_timeout() -> void:
 		_frog_state = frog_state.BEING_PAMPERED
 
 
+func _on_falling_timer_timeout() -> void:
+	if _get_state() == 3:
+		$AnimatedSprite.play("falling")
+
+
 func _on_grab_detector_input_event(_viewport, event, _shape_idx) -> void:
 	if _frog_state != frog_state.GRABBED and event.is_action_pressed("grab"):
 		_frog_state = frog_state.GRABBED
@@ -152,24 +147,11 @@ func _on_grab_detector_input_event(_viewport, event, _shape_idx) -> void:
 		_frog_state = frog_state.FALLING
 
 
-func _get_state() -> int:
-	return _frog_state
-
-
-func _on_falling_timer_timeout() -> void:
-	if _get_state() == 3:
-		$AnimatedSprite.play("falling")
-
-
 func _on_grab_detector_area_entered(area) -> void:
 	if area is FlowerBud and _frog_state == 5 and _has_hat == false:
 		area.queue_free()
 		$Hat.texture = DAISY
 		_has_hat = true
-
-
-func _change_hat_position(pos : Vector2) -> void:
-	$Hat.position = pos
 
 
 func _on_visible_on_screen_notifier_screen_exited() -> void:
