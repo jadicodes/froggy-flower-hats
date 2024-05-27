@@ -8,6 +8,7 @@ var _frog: Frog
 var _current_frogs: int = 0
 var _spawn_locations: Array = [Vector2(-97, 810), Vector2(2018, 809)]
 
+
 func _ready() -> void:
 	_animation_player.play("fade_from_black")
 	_make_new_frog()

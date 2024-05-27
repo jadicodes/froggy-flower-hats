@@ -12,9 +12,11 @@ var _flower_state:
 	set(state):
 		if state == _growth_stages.GROWN:
 			set_collision_layer_value(5, false)
+			set_collision_layer_value(6, true)
 			position = _original_position
 		if state == _growth_stages.GRABBED:
 			set_collision_layer_value(5, true)
+			set_collision_layer_value(6, false)
 		_flower_state = state
 
 
