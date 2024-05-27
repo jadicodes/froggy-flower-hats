@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://f3pn7ii05tq3"]
+[gd_scene load_steps=11 format=3 uid="uid://f3pn7ii05tq3"]
 
 [ext_resource type="Script" path="res://frog/frog.gd" id="1_kwn76"]
+[ext_resource type="Texture2D" uid="uid://c6pegjxtia2c7" path="res://frog/falling.png" id="2_0mk06"]
 [ext_resource type="Texture2D" uid="uid://buuogy2157ux8" path="res://frog/grabbed.png" id="2_2t1sg"]
+[ext_resource type="Texture2D" uid="uid://dmqqia8b8x66a" path="res://frog/idle.png" id="4_oiwvn"]
+[ext_resource type="Texture2D" uid="uid://b6jsgpx8u7ch3" path="res://frog/being_pampered.png" id="5_08kd4"]
+[ext_resource type="Texture2D" uid="uid://u5n8tayi8ebj" path="res://frog/walk.png" id="6_bq5x1"]
+[ext_resource type="Texture2D" uid="uid://ckeam3s12s6ty" path="res://frog/walk2.png" id="7_5vise"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mqs6j"]
 radius = 59.0
@@ -10,6 +15,52 @@ height = 146.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_47nvu"]
 radius = 60.0
 height = 151.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ltqj2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0mk06")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2t1sg")
+}],
+"loop": true,
+"name": &"grabbed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_oiwvn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_08kd4")
+}],
+"loop": true,
+"name": &"pampered",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("6_bq5x1")
+}, {
+"duration": 2.0,
+"texture": ExtResource("7_5vise")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [node name="Frog" type="CharacterBody2D"]
 collision_layer = 4
@@ -34,9 +85,9 @@ shape = SubResource("CapsuleShape2D_47nvu")
 [node name="FallingTimer" type="Timer" parent="."]
 wait_time = 0.15
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(-3.8147e-06, 3.8147e-06)
-texture = ExtResource("2_2t1sg")
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ltqj2")
+animation = &"walk"
 
 [node name="Hat" type="Sprite2D" parent="."]
 position = Vector2(-1, -86)

@@ -138,6 +138,7 @@ color = Color(1, 1, 1, 0)
 
 [node name="Border" type="Panel" parent="Instructions"]
 z_index = 15
+layout_mode = 0
 offset_left = 208.0
 offset_top = 81.0
 offset_right = 1736.0

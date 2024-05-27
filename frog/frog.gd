@@ -4,13 +4,6 @@ class_name Frog
 signal _left
 
 const SPEED : float = 100.0
-
-const WALK = preload("res://frog/idle.png")
-const IDLE = preload("res://frog/idle.png")
-const GRABBED = preload("res://frog/grabbed.png")
-const BEING_PAMPERED = preload("res://frog/being_pampered.png")
-const FALLING = preload("res://frog/falling.png")
-
 const DAISY = preload("res://frog/daisy_hat.png")
 
 enum frog_state {
@@ -30,9 +23,9 @@ var _has_hat : bool = false
 var _frog_state:
 	set(state):
 		if state == frog_state.WALK:
-			_set_sprite_texture(WALK)
+			$AnimatedSprite.play("walk")
 			set_collision_layer_value(4, false)
-			_change_hat_position(Vector2(-2, -63))
+			_change_hat_position(Vector2(-1, -63))
 			_reset_z_index()
 			if $RayCastLeft.is_colliding():
 				_direction = 1
@@ -40,14 +33,14 @@ var _frog_state:
 				_direction = -1
 
 		if state == frog_state.IDLE:
-			_set_sprite_texture(IDLE)
+			$AnimatedSprite.play("idle")
 			set_collision_layer_value(4, false)
 			_reset_z_index()
 			_change_hat_position(Vector2(-2, -63))
 			_set_timer()
 
 		if state == frog_state.GRABBED:
-			_set_sprite_texture(GRABBED)
+			$AnimatedSprite.play("grabbed")
 			set_collision_layer_value(4, false)
 			z_index = 10
 			_change_hat_position(Vector2(-2, -88))
@@ -58,7 +51,7 @@ var _frog_state:
 			_change_hat_position(Vector2(-2, -88))
 
 		if state == frog_state.BEING_PAMPERED:
-			_set_sprite_texture(BEING_PAMPERED)
+			$AnimatedSprite.play("pampered")
 			set_collision_layer_value(4, true)
 			_reset_z_index()
 			_change_hat_position(Vector2(-2, -63))
@@ -147,7 +140,7 @@ func _get_state() -> int:
 
 func _on_falling_timer_timeout() -> void:
 	if _get_state() == 3:
-		_set_sprite_texture(FALLING)
+		$AnimatedSprite.play("falling")
 
 
 func _on_grab_detector_area_entered(area) -> void:
