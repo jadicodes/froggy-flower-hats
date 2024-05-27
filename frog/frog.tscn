@@ -1,12 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://f3pn7ii05tq3"]
+[gd_scene load_steps=17 format=3 uid="uid://f3pn7ii05tq3"]
 
 [ext_resource type="Script" path="res://frog/frog.gd" id="1_kwn76"]
 [ext_resource type="Texture2D" uid="uid://c6pegjxtia2c7" path="res://frog/falling.png" id="2_0mk06"]
 [ext_resource type="Texture2D" uid="uid://buuogy2157ux8" path="res://frog/grabbed.png" id="2_2t1sg"]
 [ext_resource type="Texture2D" uid="uid://dmqqia8b8x66a" path="res://frog/idle.png" id="4_oiwvn"]
 [ext_resource type="Texture2D" uid="uid://b6jsgpx8u7ch3" path="res://frog/being_pampered.png" id="5_08kd4"]
+[ext_resource type="Texture2D" uid="uid://l3inc2km4eoy" path="res://frog/thinking.png" id="6_2kk20"]
 [ext_resource type="Texture2D" uid="uid://u5n8tayi8ebj" path="res://frog/walk.png" id="6_bq5x1"]
 [ext_resource type="Texture2D" uid="uid://ckeam3s12s6ty" path="res://frog/walk2.png" id="7_5vise"]
+[ext_resource type="Texture2D" uid="uid://bjej3fmvptae2" path="res://frog/daisy_bubble.png" id="8_6pn2t"]
+[ext_resource type="Texture2D" uid="uid://b514lacw3q4uo" path="res://frog/think1.png" id="9_jcwrn"]
+[ext_resource type="Texture2D" uid="uid://dou5if3hjx1gl" path="res://frog/think2.png" id="10_5erxw"]
+[ext_resource type="Texture2D" uid="uid://g837g7lanqae" path="res://frog/think3.png" id="11_fxrcc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mqs6j"]
 radius = 59.0
@@ -51,6 +56,14 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_2kk20")
+}],
+"loop": true,
+"name": &"thinking",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 2.0,
 "texture": ExtResource("6_bq5x1")
 }, {
@@ -60,6 +73,36 @@ animations = [{
 "loop": true,
 "name": &"walk",
 "speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o1yvu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_6pn2t")
+}],
+"loop": true,
+"name": &"daisy",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_jcwrn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5erxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fxrcc")
+}],
+"loop": true,
+"name": &"thinking",
+"speed": 2.0
 }]
 
 [node name="Frog" type="CharacterBody2D"]
@@ -87,7 +130,7 @@ wait_time = 0.15
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ltqj2")
-animation = &"walk"
+animation = &"thinking"
 
 [node name="Hat" type="Sprite2D" parent="."]
 position = Vector2(-1, -86)
@@ -105,6 +148,10 @@ hit_from_inside = true
 target_position = Vector2(-594, 2)
 collision_mask = 2
 hit_from_inside = true
+
+[node name="ThoughtBubble" type="AnimatedSprite2D" parent="."]
+position = Vector2(117, -64)
+sprite_frames = SubResource("SpriteFrames_o1yvu")
 
 [connection signal="timeout" from="DecisionTimer" to="." method="_on_decision_timer_timeout"]
 [connection signal="area_entered" from="GrabDetector" to="." method="_on_grab_detector_area_entered"]

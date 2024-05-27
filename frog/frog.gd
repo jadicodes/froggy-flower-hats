@@ -11,6 +11,7 @@ enum frog_state {
 	IDLE,
 	GRABBED,
 	FALLING,
+	THINKING,
 	BEING_PAMPERED,
 	DONE,
 }
@@ -45,6 +46,13 @@ var _frog_state:
 			z_index = 10
 			_change_hat_position(Vector2(-2, -88))
 
+		if state == frog_state.THINKING:
+			$AnimatedSprite.play("thinking")
+			set_collision_layer_value(4, true)
+			_reset_z_index()
+			_change_hat_position(Vector2(-2, -63))
+			$ThoughtBubble.play("thinking")
+
 		if state == frog_state.FALLING:
 			$FallingTimer.start()
 			set_collision_layer_value(4, true)
@@ -55,6 +63,7 @@ var _frog_state:
 			set_collision_layer_value(4, true)
 			_reset_z_index()
 			_change_hat_position(Vector2(-2, -63))
+			$ThoughtBubble.play("daisy")
 
 		_frog_state = state
 
@@ -90,9 +99,15 @@ func _physics_process(delta) -> void:
 		velocity.y += _gravity * delta
 		velocity.x = 0
 
+	if _frog_state == frog_state.THINKING:
+		velocity.y = 0
+		velocity.x = 0
+
 	if _frog_state == frog_state.BEING_PAMPERED:
 		velocity.y = 0
 		velocity.x = 0
+		if _has_hat == true:
+			$ThoughtBubble.hide()
 
 	move_and_slide()
 
@@ -126,6 +141,9 @@ func _on_decision_timer_timeout() -> void:
 		_frog_state = frog_state.WALK
 		return
 
+	if _frog_state == frog_state.THINKING:
+		_frog_state = frog_state.BEING_PAMPERED
+
 
 func _on_grab_detector_input_event(_viewport, event, _shape_idx) -> void:
 	if _frog_state != frog_state.GRABBED and event.is_action_pressed("grab"):
@@ -144,7 +162,7 @@ func _on_falling_timer_timeout() -> void:
 
 
 func _on_grab_detector_area_entered(area) -> void:
-	if area is FlowerBud and _frog_state == 4 and _has_hat == false:
+	if area is FlowerBud and _frog_state == 5 and _has_hat == false:
 		area.queue_free()
 		$Hat.texture = DAISY
 		_has_hat = true
