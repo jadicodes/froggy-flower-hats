@@ -6,11 +6,13 @@ enum _growth_stages {
 	GRABBED,
 }
 
+var _original_position
 
 var _flower_state:
 	set(state):
 		if state == _growth_stages.GROWN:
 			set_collision_layer_value(5, false)
+			position = _original_position
 		if state == _growth_stages.GRABBED:
 			set_collision_layer_value(5, true)
 		_flower_state = state
@@ -32,3 +34,7 @@ func _on_input_event(_viewport, event, _shape_idx) -> void:
 	if _flower_state == _growth_stages.GRABBED and event.is_action_released("grab"):
 		_flower_state = _growth_stages.GROWN
 		z_index = 2
+
+
+func _set_original_position(pos):
+	_original_position = pos

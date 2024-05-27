@@ -20,6 +20,7 @@ func _grow_flower() -> void:
 	_flower_bud = preload("res://flower/flower_bud/flower_bud.tscn").instantiate()
 	call_deferred("add_child", _flower_bud)
 	_flower_bud.global_position = _find_position()
+	_flower_bud._set_original_position(_flower_bud.global_position)
 	_current_flowers += 1
 	_set_timer()
 
