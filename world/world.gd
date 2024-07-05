@@ -1,6 +1,6 @@
 extends Node2D
 
-const _MAX_FROGS = 4
+const _MAX_FROGS = 5
 
 @onready var _animation_player = $FadeFromBlack
 

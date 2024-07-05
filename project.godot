@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Jukebox="*res://jukebox/jukebox.tscn"
 
+[debug]
+
+settings/stdout/print_gpu_profile=true
+
 [display]
 
 window/size/viewport_width=1920
